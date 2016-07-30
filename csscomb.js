@@ -25,7 +25,11 @@ process.stdin.on('end', function () {
         config ||
         Comb.getConfig('csscomb');
 
-    combed = comb.configure(config).processString(str, {syntax: syntax});
-    process.stdout.write(combed);
+    comb
+        .configure(config)
+        .processString(str, { syntax: syntax })
+        .then(function(result) {
+            console.log(result.slice(0, -1));
+        });
 });
 
